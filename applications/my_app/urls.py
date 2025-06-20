@@ -7,14 +7,14 @@ from django.urls import path
 app_name = "my_app"
 urlpatterns = [
     # get
-    path("authors/", views.getAuthor, name="getAuthor"),
-    path("books/", views.getBook, name="getBook"),
-    path("publishers/", views.getPublisher, name="getPublisher"),
-    path("categories/", views.getCategory, name="getCategory"),
+    path("authors/", views.get_author, name="getAuthor"),
+    path("books/", views.get_book, name="getBook"),
+    path("publishers/", views.get_publisher, name="getPublisher"),
+    path("categories/", views.get_category, name="getCategory"),
     
     
     # post
-    path("author/add/", views.addAuthor, name="addAuthor"),
+    path("author/add/", views.add_author, name="addAuthor"),
 
     # Your login/logout views
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),

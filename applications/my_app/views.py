@@ -28,7 +28,7 @@ r = redis.Redis(host='localhost', port=6379, db=1)
 
 
 @api_view(['GET'])
-def getAuthor(request):
+def get_author(request):
     """
     This is a simple view that returns the author of the API.
     """
@@ -54,7 +54,7 @@ def getAuthor(request):
 
 
 @api_view(['GET'])
-def getBook(request):
+def get_book(request):
     """
     This is a simple view that returns the book of the API.
     """
@@ -79,7 +79,7 @@ def getBook(request):
 
 @api_view(['GET'])
 @jwt_required
-def getPublisher(request):
+def get_publisher(request):
     """
     This is a simple view that returns the publisher of the API.
     """
@@ -96,7 +96,7 @@ def getPublisher(request):
 
 @api_view(['GET'])
 @jwt_required
-def getCategory(request):
+def get_category(request):
     """
     This is a simple view that returns the category of the API.
     """
@@ -113,7 +113,7 @@ def getCategory(request):
 
 
 @api_view(['POST'])
-def addAuthor(request):
+def add_author(request):
     """
     This is a simple view that adds an author to the API.
     """

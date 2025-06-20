@@ -68,7 +68,6 @@ class RateLimiterMiddleware:
         print(f"-----   Detected IP: {ip}")
         redis_key = f"rate_limit:{ip}"
         
-        # r.set(redis_key, 0, ex=self.rate_limit_seconds, nx=True)
         r.incr(redis_key)
         r.expire(name=redis_key, time=self.rate_limit_seconds, nx=True)
         current = r.get(redis_key)
