@@ -13,5 +13,5 @@ MIDDLEWARE = [
     
     
     
-    'applications.commons.middleware.RateLimiterMiddleware'
+    # 'applications.commons.middleware.RateLimiterMiddleware'
 ]

@@ -1,6 +1,4 @@
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -16,7 +14,13 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     
     'corsheaders',
+    'storages',
     
     'applications.my_app',
     'applications',
 ]
+
+
+
+
+

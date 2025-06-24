@@ -19,14 +19,17 @@ from django_app.config.log_config import *
 from django_app.config.jwt_config import *
 from django_app.config.timezone_config import *
 from django_app.config.key_config import *
+import os
 
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 
+from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(dotenv_path=BASE_DIR / '.env')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -46,7 +49,8 @@ ALLOWED_HOSTS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        "DIRS": [os.path.join(BASE_DIR, "templates"), ],
+        # "DIRS":[],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,3 +97,36 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 SECRET_KEY = "supersupersecretkey"
+
+
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+#         "OPTIONS": {
+#             "access_key": os.getenv("AWS_ACCESS_KEY_ID"),
+#             "secret_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+#             "bucket_name": os.getenv("AWS_STORAGE_BUCKET_NAME"),
+#             "region_name": "ap-southeast-1",
+#         },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+#         "OPTIONS": {
+#             "access_key": os.getenv("AWS_ACCESS_KEY_ID"),
+#             "secret_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+#             "bucket_name": os.getenv("AWS_STORAGE_BUCKET_NAME"),
+#             "region_name": "ap-southeast-1",
+#         },
+#     },
+# }
+
+AWS_STORAGE_BUCKET_NAME=os.getenv("AWS_STORAGE_BUCKET_NAME","default_bucket_name")
+AWS_S3_REGION_NAME="ap-southeast-1"
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
+
+
+# # AWS_QUEYSTRING_AUTH = False
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+STATIC_URL = 'statics/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
