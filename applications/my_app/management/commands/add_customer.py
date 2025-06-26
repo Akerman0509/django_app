@@ -16,7 +16,7 @@ class Command(BaseCommand):
         try:
             customer_names = [
                     'Customer 1', 'Customer 2', 'Customer 3',
-                    'Customer 4', 'Customer 5', 'Customer 6',
+                    'Customer 4'
                 ]
                 # Step 1: Efficiently create all missing customers.
                 # The returned objects here will NOT have IDs.

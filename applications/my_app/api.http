@@ -54,3 +54,31 @@ Content-Type: application/json
     "username": "akerman0509",
     "password": "1111"
 }
+###
+
+# path("product<int:id>/add_to_cart/", views.add_to_cart, name="addToCart"),
+POST {{baseUrl}}/product/add_to_cart/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "product_id": 89,
+    "quantity": 1
+}
+
+###
+POST {{baseUrl}}/product/add_to_cart/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "customer_id": 1,
+    "product_id": 54,
+    "quantity": 1
+}
+###
+POST {{baseUrl}}/cart/checkout/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "customer_id": 1
+}

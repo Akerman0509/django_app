@@ -15,6 +15,8 @@ urlpatterns = [
     
     # post
     path("author/add/", views.add_author, name="addAuthor"),
+    path("product/add_to_cart/", views.add_to_cart, name="addToCart"),
+    path("cart/checkout/", views.checkout, name="checkout"),
 
     # Your login/logout views
     path('login/', auth_views.LoginView.as_view(template_name='login_page/login.html'), name='login'),

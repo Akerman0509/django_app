@@ -2,7 +2,7 @@ from django.contrib import admin
 
 
 
-from .models import Author, Publisher, Book, Category, Customer, Cart, CartItem
+from .models import Author, Publisher, Book, Category, Customer, Cart, CartItem, Product, Receipt, ReceiptItem
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
@@ -51,4 +51,22 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ('user__name',)
     
     
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'cart__name','product', 'quantity', 'unit_price', 'checkout_status')
+    search_fields = ('product__title',)
     
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'price', 'stock')
+    search_fields = ('name',)
+    
+@admin.register(Receipt)
+class ReceiptAdmin(admin.ModelAdmin):
+    list_display = ('id', 'cart__name', 'created_at', 'total_amount')
+    search_fields = ('cart__customer_id__name',)
+    
+@admin.register(ReceiptItem)
+class ReceiptItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'receipt__id', 'receipt','product__name','quantity', 'unit_price')
+    search_fields = ('product__name',)

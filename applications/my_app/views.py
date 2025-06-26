@@ -7,7 +7,7 @@ from django.http import HttpResponse
 logger = logging.getLogger(__name__)
 
 from .models import Author, Publisher, Category, Book
-from .serializers import AuthorSerializer, PublisherSerializer, CategorySerializer, BookSerializer, ValidateAuthorSerializer
+from .serializers import AuthorSerializer, PublisherSerializer, CategorySerializer, BookSerializer, ValidateAuthorSerializer, CustomerSerializer, CartItemSerializer, ReceiptSerializer
 from django.core.cache import cache
 
 import redis
@@ -211,3 +211,28 @@ def public_key_view(request):
     with open(key_path, 'r') as f:
         public_key = f.read()
     return HttpResponse(public_key, content_type='text/plain')
+
+
+@api_view(['POST'])
+def add_to_cart(request):
+    """
+    This is a simple view that adds an item to the cart.
+    """
+    serializer = CartItemSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        cart_item = serializer.save()
+        logger.info("[add_to_cart] cart item created: %s", cart_item)
+        return Response(serializer.data, status=201)
+    
+    return Response(serializer.errors, status=400)
+
+@api_view(['POST'])
+def checkout(request):
+    serializer = ReceiptSerializer(data=request.data)
+    if serializer.is_valid():
+        receipt = serializer.save()
+        logger.info("[checkout] Receipt created: %s", receipt)
+        return Response(serializer.data, status=201)
+    
+    return Response(serializer.errors, status=400)
